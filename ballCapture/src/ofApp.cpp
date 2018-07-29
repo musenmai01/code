@@ -25,13 +25,13 @@ void ofApp::setup(){
 void ofApp::update(){
     mBallCapture.update();
     
-    if(mBallCapture.getDetectedNumBalls()>0 && mPrevDetectedStatus == false)
-    {
-        mRing.play();
-        mPrevDetectedStatus = true;
-    }else{
-        mPrevDetectedStatus = false;
-    }
+//    if(mBallCapture.getDetectedNumBalls()>0 && mPrevDetectedStatus == false)
+//    {
+//        mRing.play();
+//        mPrevDetectedStatus = true;
+//    }else{
+//        mPrevDetectedStatus = false;
+//    }
 }
 
 //--------------------------------------------------------------

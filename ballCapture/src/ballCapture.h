@@ -32,6 +32,11 @@ public:
     // 検出されたボールの個数
     int getDetectedNumBalls();
     
+    vector<ofVec3f> getDetectedBallPoses();
+    
+    // 新たにボールが検出されたかどうか
+    bool bDetectedNewBall();
+    
 private:
     
     // kinectのインスタンス
@@ -58,6 +63,7 @@ private:
     int farThreshold;
     
     int angle;
+    int mPrevNumBall;
     
     // used for viewing the point cloud
     ofEasyCam easyCam;

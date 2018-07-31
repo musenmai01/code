@@ -3,12 +3,13 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    mPrevDetectedStatus = false;
-    
     ofSetVerticalSync(true);
 
     mBallCapture.setup();
     
+    // open an outgoing connection to HOST:PORT
+    mSender.setup(HOST, PORT);
+
     // setup GUI
     mNearThreshold.addListener(this, &ofApp::nearThresholdChanged);
     mFarThreshold.addListener(this, &ofApp::farThresholdChanged);
@@ -25,13 +26,55 @@ void ofApp::setup(){
 void ofApp::update(){
     mBallCapture.update();
     
-//    if(mBallCapture.getDetectedNumBalls()>0 && mPrevDetectedStatus == false)
-//    {
-//        mRing.play();
-//        mPrevDetectedStatus = true;
-//    }else{
-//        mPrevDetectedStatus = false;
-//    }
+    
+    if(mBallCapture.getDetectedNumBalls()>0 && mBallCapture.bDetectedNewBall())
+    {
+        // 検出したかどうかを送信
+        {
+            ofxOscMessage m;
+            m.setAddress("/mouse/button");
+            m.addIntArg(1);
+            mSender.sendMessage(m, true);
+        }
+        
+        // 位置を送信
+        {
+            vector<ofVec3f> poses = mBallCapture.getDetectedBallPoses();
+            
+            for(auto& p : poses){
+                cout << p.x << "," << p.y << endl;
+                ofxOscMessage m;
+                m.setAddress("/mouse/position");
+                m.addFloatArg(ofMap(p.x, 0, 640, 0.f, 1.f, true));
+                m.addFloatArg(ofMap(p.y, 0, 480, 0.f, 1.f, true));
+                mSender.sendMessage(m, false);
+            }
+        }
+        
+        //mRing.play();
+    }else{
+        // 検出したかどうかを送信
+        {
+            ofxOscMessage m;
+            m.setAddress("/mouse/button");
+            m.addIntArg(0);
+            mSender.sendMessage(m, true);
+        }
+        
+        // 位置を送信
+        {
+            vector<ofVec3f> poses = mBallCapture.getDetectedBallPoses();
+            
+            for(auto& p : poses){
+                cout << p.x << "," << p.y << endl;
+                ofxOscMessage m;
+                m.setAddress("/mouse/position");
+                m.addFloatArg(ofMap(0, 0, 640, 0.f, 1.f, true));
+                m.addFloatArg(ofMap(0, 0, 480, 0.f, 1.f, true));
+                mSender.sendMessage(m, false);
+            }
+        }
+    }
 }
 
 //--------------------------------------------------------------

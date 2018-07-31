@@ -37,6 +37,9 @@ void ballCapture::setup(){
 
 //--------------------------------------------------------------
 void ballCapture::update(){
+    
+    mPrevNumBall = getDetectedNumBalls();
+    
     ofBackground(100, 100, 100);
     
     mKinect.update();
@@ -76,7 +79,6 @@ void ballCapture::update(){
         // also, find holes is set to true so we will get interior contours as well....
         contourFinder.findContours(grayImage, 10, (mKinect.width*mKinect.height)/2, 20, false);
     }
-
 }
 
 //--------------------------------------------------------------
@@ -153,6 +155,27 @@ void ballCapture::setFarThreshold(int val)
 int ballCapture::getDetectedNumBalls()
 {
     return contourFinder.nBlobs;
+}
+
+//--------------------------------------------------------------
+bool ballCapture::bDetectedNewBall()
+{
+    if(mPrevNumBall != getDetectedNumBalls()){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+//--------------------------------------------------------------
+vector<ofVec3f> ballCapture::getDetectedBallPoses()
+{
+    vector<ofVec3f> poses;
+    for(auto &n : contourFinder.blobs)
+    {
+        poses.push_back(n.centroid);
+    }
+    return poses;
 }
 
 //--------------------------------------------------------------

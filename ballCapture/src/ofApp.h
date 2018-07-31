@@ -2,7 +2,15 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
+#include "ofxOsc.h"
 #include "ballCapture.h"
+
+// send host (aka ip address)
+#define HOST "localhost"
+
+/// send port
+#define PORT 12345
+
 
 class ofApp : public ofBaseApp{
 
@@ -39,6 +47,5 @@ class ofApp : public ofBaseApp{
         // 検出された音を流す変数
         ofSoundPlayer mRing;
     
-        // 前のフレームで検出されたかどうかの状態
-        bool mPrevDetectedStatus;
+        ofxOscSender mSender;
 };

@@ -51,6 +51,8 @@ void draw () {
 }
 
 void mousePressed() {
+  mouseLoc.x = mouseX;
+  mouseLoc.y = mouseY;
   fireworks.add(new Fireworks(power));
 }
 
@@ -133,8 +135,6 @@ class Fireworks {
     float sinTheta;
     float phi;
     float colorchange=random(0, 5);
-    mouseLoc.x = mouseX;
-    mouseLoc.y = mouseY;
     radius=r;
     for (int i=0; i<num; i++) {
       cosTheta = random(0, 1) * 2 - 1;

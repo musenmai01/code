@@ -38,7 +38,7 @@ oscP5.send(msg, myRemoteLocation);
 
 //マウスボタンを押した時にメッセージを送信
 void mousePressed(){
-OscMessage msg = new OscMessage("/mouse/cliked");
+OscMessage msg = new OscMessage("/mouse/button");
 msg.add(1); //1を送信
 //OSCメッセージ送信
 oscP5.send(msg, myRemoteLocation);
@@ -46,7 +46,7 @@ oscP5.send(msg, myRemoteLocation);
 
 //マウスボタンを離した時にメッセージを送信
 void mouseReleased(){
-OscMessage msg = new OscMessage("/mouse/cliked");
+OscMessage msg = new OscMessage("/mouse/button");
 msg.add(0); //0を送信
 //OSCメッセージ送信
 oscP5.send(msg, myRemoteLocation);

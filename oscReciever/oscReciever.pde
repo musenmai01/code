@@ -40,7 +40,7 @@ mouseLoc.x = msg.get(0).floatValue() * width;
 //次の値をint方としてY座標に
 mouseLoc.y = msg.get(1).floatValue() * height;
 }
-if(msg.checkAddrPattern("/mouse/cliked")==true) {
+if(msg.checkAddrPattern("/mouse/button")==true) {
 //Bool値を読み込み
 clicked = msg.get(0).intValue();
 println("msg = " + clicked);

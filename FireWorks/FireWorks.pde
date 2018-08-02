@@ -115,7 +115,8 @@ class Fireworks {
   //花火の火の数
   int num=512;
   //花火の中心の初期位置
-  PVector centerPosition;
+  PVector centerPosition = new PVector(mouseLoc.x, mouseLoc.y, 0);
+
   //花火の中心の初期速度
   PVector velocity=new PVector(0, 0, 0);
 
@@ -134,7 +135,6 @@ class Fireworks {
     float colorchange=random(0, 5);
     mouseLoc.x = mouseX;
     mouseLoc.y = mouseY;
-    centerPosition = new PVector(mouseLoc.x, mouseLoc.y, 0);
     radius=r;
     for (int i=0; i<num; i++) {
       cosTheta = random(0, 1) * 2 - 1;

@@ -36,9 +36,9 @@ void oscEvent(OscMessage msg) {
 //もしOSCメッセージが /mouse/position だったら
 if(msg.checkAddrPattern("/mouse/position")==true) {
 //最初の値をint方としてX座標に
-mouseLoc.x = msg.get(0).intValue();
+mouseLoc.x = msg.get(0).floatValue() * width;
 //次の値をint方としてY座標に
-mouseLoc.y = msg.get(1).intValue();
+mouseLoc.y = msg.get(1).floatValue() * height;
 }
 if(msg.checkAddrPattern("/mouse/cliked")==true) {
 //Bool値を読み込み

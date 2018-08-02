@@ -30,8 +30,8 @@ ellipse(mouseX, mouseY, 10, 10);
 //現在のマウスの位置をOSCで送出
 //新規にメッセージ作成
 OscMessage msg = new OscMessage("/mouse/position");
-msg.add(mouseX); //X座標の位置を追加
-msg.add(mouseY); //Y座標の位置を追加
+msg.add(map(mouseX, 0, width, 0.0f, 1.0f)); //X座標の位置を追加
+msg.add(map(mouseY, 0, height, 0.0f, 1.0f)); //Y座標の位置を追加
 //OSCメッセージ送信
 oscP5.send(msg, myRemoteLocation);
 }

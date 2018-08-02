@@ -17,7 +17,8 @@ void ofApp::setup(){
     mGui.setup(); // most of the time you don't need a name
     mGui.add(mNearThreshold.setup("near threshold", 237, 3, 255));
     mGui.add(mFarThreshold.setup("far threshold", 213, 3, 255));
-    
+    mGui.loadFromFile("settings.xml");
+
     // 音のロード
     mRing.load("sound/ring.wav");
 }
@@ -88,11 +89,25 @@ void ofApp::draw(){
 void ofApp::exit(){
     mNearThreshold.removeListener(this, &ofApp::nearThresholdChanged);
     mFarThreshold.removeListener(this, &ofApp::farThresholdChanged);
+    //mGui.saveToFile("settings.xml");
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     mBallCapture.keyPressed(key);
+    
+    switch (key) {
+        case 's':
+            mGui.saveToFile("settings.xml");
+            break;
+            
+        case 'l':
+            mGui.loadFromFile("settings.xml");
+            break;
+            
+        default:
+            break;
+    }
 }
 
 //--------------------------------------------------------------

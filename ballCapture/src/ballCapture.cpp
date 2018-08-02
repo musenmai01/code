@@ -28,8 +28,8 @@ void ballCapture::setup(){
     ofSetFrameRate(60);
     
     // zero the tilt on startup
-    angle = 0;
-    mKinect.setCameraTiltAngle(angle);
+//    angle = 0;
+//    mKinect.setCameraTiltAngle(angle);
     
     // start from the front
     bDrawPointCloud = false;

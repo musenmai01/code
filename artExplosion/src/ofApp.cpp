@@ -18,22 +18,20 @@ void ofApp::setup(){
     mySound.load("destruction.mp3");//爆発音の設定
     myImageSpace.load("space.jpg");//背景設定を設定
     myImageAlien.load("alien.png");//ボールの当てる的の設定
+    ofHideCursor();//マウスカーソルのなくす
     
-    //円の位置
-    for(int i = 0;i < CIRCLE_NUM;i++){
-        particle[i].setup();
-    }
-
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     
     //円の座標を更新
-    for(int i = 0;i < CIRCLE_NUM;i++){
-        particle[i].update();
+    
+    //インスタンスの数だけupdate()を繰り返すofPoint
+    for (int i=0; i<particles.size(); i++) {
+        particles[i].update();
     }
-
+    
     // recieverの更新
     // mIsBallEvent: ボールが壁にぶつかったかどうか
     // mBallPos: ぶつかったときの壁の位置(x, y)
@@ -46,14 +44,17 @@ void ofApp::update(){
         cout << "ball event detected" << endl;
         cout << mBallPos.x << "," << mBallPos.y << endl;
         
-        
         //サウンド再生開始
         mySound.play();
         
-        //マウスを押したら爆発        
-        for(int i = 0;i < CIRCLE_NUM;i++){
-            particle[i].mousePressed(mBallPos.x,mBallPos.y);
-        }
+//        //マウスを押したら爆発
+//        for(int i = 0;i < CIRCLE_NUM;i++){
+//            particle[i].mousePressed(mBallPos.x,mBallPos.y);
+//        }
+        
+        Particle p;
+        p.setPos(ofPoint(mBallPos.x,mBallPos.x));
+        particles.push_back(p);
     }
 
 }
@@ -69,18 +70,21 @@ void ofApp::draw(){
     myImageSpace.draw(0, 0, ofGetWidth(), ofGetHeight());
     myImageAlien.draw(ofGetWidth()/2-250, ofGetHeight()/2-150, 500, 500);
     
-    //ランダムな位置に円を描画
-    for(int i = 0;i < CIRCLE_NUM;i++){
-        particle[i].draw();
+    //blobsに格納されたofBlobのインスタンスの数だけdraw()をくりかえす
+    for (int i=0; i<particles.size(); i++) {
+        particles[i].draw();
     }
 
     
-    ofDrawCircle(mBallPos.x, mBallPos.y, 10);
+    //ofDrawCircle(mBallPos.x, mBallPos.y, 10);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    //[r]を押すと全ての円を削除する。
+    if(key == 'r'){
+        particles.clear();
+    }
 }
 
 //--------------------------------------------------------------
@@ -103,10 +107,10 @@ void ofApp::mousePressed(int x, int y, int button){
     //サウンド再生開始
     mySound.play();
     
-    //マウスを押したら爆発
-    for(int i = 0;i < CIRCLE_NUM;i++){
-        particle[i].mousePressed(x,y);
-    }
+    //マウスをクリックした位置に、新規にインスタンスを作成
+    Particle p;
+    p.setPos(ofPoint(mouseX,mouseY));
+    particles.push_back(p);
 }
 
 //--------------------------------------------------------------

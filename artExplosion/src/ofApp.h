@@ -40,9 +40,9 @@ class ofApp : public ofBaseApp{
         // ----------
         // 北原さんのプロジェクト
         // ----------
-        static const int CIRCLE_NUM = 1000;
-        //位置ベクトル
-        Particle particle[CIRCLE_NUM];
+    
+        //Particleのインスタンスを作成
+        vector<Particle> particles;
         //音のクラス
         ofSoundPlayer mySound;
         //画像のクラス

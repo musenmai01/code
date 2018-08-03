@@ -8,30 +8,37 @@
 
 #ifndef particle_hpp
 #define particle_hpp
+#define NUM 1000
 
 #include <stdio.h>
 #include "ofMain.h"
 
 class Particle{
-public:
-    void setup();
-    void update();
-    void draw();
-    void mousePressed(int x, int y);//ここはあとで削除
-    
-    float loc_x;//円のx座標
-    float loc_y;//円のy座標
-    float speed_x;//x軸方向のスピード
-    float speed_x1;//x軸の方向に摩擦係数を加えたもの
-    float speed_y;//y軸方向のスピード
-    float speed_y1;//y軸の方向に摩擦係数を加えてもの
-    int radius;//円の半径
-    int red;//redの成分
-    int green;//greenの成分
-    int blue;//blueの成分
+private:
+    ofPoint pos[NUM];//円の位置
+    float radius[NUM];//円の半径
+    ofPoint speed[NUM];//円の移動スピード
+    ofPoint speed1[NUM];//円の移動スピード
+    float phase;//円の伸縮連動の位相
+    float phaseSpeed;//円の伸縮スピード
+    float strechedRadius;//伸縮した結果の半径
+    int red[NUM];//redの成分
+    int green[NUM];//greenの成分
+    int blue[NUM];//blueの成分
     float gravity;//重力の強さを設定
     float friction;//摩擦力の強さを設定
     
+public:
+    Particle();//コンストラクタ
+    void draw(); //円を描く
+    void update();//円の移動
+    void setRadius(float radius);//radiusのセッター
+    float getRadius();//radiusのゲッター
+    void setPos(ofPoint pos);//posのセッター
+    ofPoint getPos();//posのゲッター
+    void setSpeed(ofPoint speed);//speedセッター
+    ofPoint getSpeed();//speedゲッター
+    void mousePressed(int x, int y);
 
 };
 

@@ -16,6 +16,8 @@ void ofApp::setup(){
     ofSetCircleResolution(64);//円の解像度の設定
     ofEnableAlphaBlending();//透過の設定
     mySound.load("destruction.mp3");//爆発音の設定
+    myImageSpace.load("space.jpg");//背景設定を設定
+    myImageAlien.load("alien.png");//ボールの当てる的の設定
     
     //円の位置
     for(int i = 0;i < CIRCLE_NUM;i++){
@@ -60,10 +62,12 @@ void ofApp::update(){
 void ofApp::draw(){
     // 爆発を描画
     // ここに追加してください
-    //塗りつぶし
-    ofSetColor(0,0,0,23);
-    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
     
+    //塗りつぶし
+    ofSetColor(255,255,255,23);
+    //宇宙の背景を配置
+    myImageSpace.draw(0, 0, ofGetWidth(), ofGetHeight());
+    myImageAlien.draw(ofGetWidth()/2-250, ofGetHeight()/2-150, 500, 500);
     
     //ランダムな位置に円を描画
     for(int i = 0;i < CIRCLE_NUM;i++){

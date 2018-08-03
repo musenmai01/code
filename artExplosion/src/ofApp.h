@@ -45,6 +45,8 @@ class ofApp : public ofBaseApp{
         Particle particle[CIRCLE_NUM];
         //音のクラス
         ofSoundPlayer mySound;
-
+        //画像のクラス
+        ofImage myImageSpace;
+        ofImage myImageAlien;
 
 };

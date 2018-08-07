@@ -14,7 +14,7 @@ int clicked;
 //花火のarrayListの作成
 ArrayList<Fireworks> fireworks=new ArrayList<Fireworks>();      
 
-int power=180;
+int power=150;
 
 void setup () {
   noCursor();
@@ -126,7 +126,7 @@ class Fireworks {
   PImage imgInside;
 
   float radius;
-  PVector accel=new PVector(0, 0.5, 0);
+  PVector accel=new PVector(0, 0.3, 0);
   PVector[] firePosition=new PVector[num];
 
 
